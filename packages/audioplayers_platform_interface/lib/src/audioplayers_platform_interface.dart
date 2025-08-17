@@ -125,6 +125,9 @@ abstract class MethodChannelAudioplayersPlatformInterface {
   ///  * otherwise not supported (e.g. LOW_LATENCY mode on Android)
   Future<int?> getDuration(String playerId);
 
+  void setOnAudioFocusChanged(void Function(int state) onFocusChanged) {
+  }
+
   /// Returns the current position of playback, in milliseconds, if available.
   ///
   /// Might not be available if:

@@ -488,6 +488,10 @@ class AudioPlayer {
     return Duration(milliseconds: milliseconds);
   }
 
+  void setOnAudioFocusChanged(void Function(int state) onFocusChanged){
+    _platform.setOnAudioFocusChanged(onFocusChanged);
+  }
+
   /// Closes all [StreamController]s.
   ///
   /// You must call this method when your [AudioPlayer] instance is not going to

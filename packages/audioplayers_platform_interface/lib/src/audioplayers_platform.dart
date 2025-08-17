@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:audioplayers_platform_interface/src/api/audio_context.dart';
 import 'package:audioplayers_platform_interface/src/api/audio_event.dart';
 import 'package:audioplayers_platform_interface/src/api/player_mode.dart';
@@ -28,8 +27,21 @@ class AudioplayersPlatform extends AudioplayersPlatformInterface
 
 mixin MethodChannelAudioplayersPlatform
     implements MethodChannelAudioplayersPlatformInterface {
-  static const MethodChannel _methodChannel =
-      MethodChannel('xyz.luan/audioplayers');
+  static final MethodChannel _methodChannel =
+      const MethodChannel('xyz.luan/audioplayers')
+        ..setMethodCallHandler((call) {
+          if(call.method == 'onFocusChange'){
+            gOnFocusChanged?.call(call.arguments as int);
+          }
+          return Future.value(true);
+        });
+
+  static void Function(int state)? gOnFocusChanged;
+
+  @override
+  void setOnAudioFocusChanged(void Function(int state) onFocusChanged) {
+    gOnFocusChanged = onFocusChanged;
+  }
 
   @override
   Future<void> create(String playerId) {

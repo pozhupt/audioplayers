@@ -163,4 +163,9 @@ class WebAudioplayersPlatform extends AudioplayersPlatformInterface {
     await player.dispose();
     players.remove(playerId);
   }
+
+  @override
+  void setOnAudioFocusChanged(void Function(int state) onFocusChanged) {
+    // TODO: implement setOnAudioFocusChanged
+  }
 }

@@ -3,6 +3,8 @@ package xyz.luan.audioplayers
 import android.content.Context
 import android.media.AudioManager
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.FlutterPlugin.FlutterPluginBinding
 import io.flutter.plugin.common.BinaryMessenger
@@ -28,6 +30,7 @@ class AudioplayersPlugin : FlutterPlugin {
 
     private val players = ConcurrentHashMap<String, WrappedPlayer>()
     private var defaultAudioContext = AudioContextAndroid()
+    private val handler = Handler(Looper.getMainLooper())
 
     override fun onAttachedToEngine(binding: FlutterPluginBinding) {
         context = binding.applicationContext
@@ -250,6 +253,12 @@ class AudioplayersPlugin : FlutterPlugin {
 
     fun handleSeekComplete(player: WrappedPlayer) {
         player.eventHandler.success("audio.onSeekComplete")
+    }
+
+    fun handleAudioFocusChange(state: Int) {
+        handler.post {
+            methods.invokeMethod("onFocusChange",state)
+        }
     }
 }
 

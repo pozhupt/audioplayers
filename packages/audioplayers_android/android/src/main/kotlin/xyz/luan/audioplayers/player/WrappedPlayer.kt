@@ -117,20 +117,23 @@ class WrappedPlayer internal constructor(
 
     private val focusManager = FocusManager.create(
         this,
+        onFocusChange = { state ->
+            ref.handleAudioFocusChange(state)
+        },
         onGranted = {
             // Check if in playing state, as the focus can also be gained e.g. after a phone call, even if not playing.
-            if (playing) {
-                player?.start()
-            }
+//            if (playing) {
+//                player?.start()
+//            }
         },
         onLoss = { isTransient ->
-            if (isTransient) {
-                // Do not check or set playing state, as the state should be recovered after granting focus again.
-                player?.pause()
-            } else {
-                // Audio focus won't be recovered
-                pause()
-            }
+//            if (isTransient) {
+//                // Do not check or set playing state, as the state should be recovered after granting focus again.
+//                player?.pause()
+//            } else {
+//                // Audio focus won't be recovered
+//                pause()
+//            }
         },
     )
 

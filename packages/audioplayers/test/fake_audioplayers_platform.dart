@@ -163,4 +163,9 @@ class FakeAudioplayersPlatform extends AudioplayersPlatformInterface {
     calls.add(FakeCall(id: playerId, method: 'getEventStream'));
     return eventStreamControllers[playerId]!.stream;
   }
+
+  @override
+  void setOnAudioFocusChanged(void Function(int state) onFocusChanged) {
+    // TODO: implement setOnAudioFocusChanged
+  }
 }

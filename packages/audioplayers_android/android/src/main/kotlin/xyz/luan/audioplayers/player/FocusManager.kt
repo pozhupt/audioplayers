@@ -8,6 +8,7 @@ import xyz.luan.audioplayers.AudioContextAndroid
 
 abstract class FocusManager {
     abstract val player: WrappedPlayer
+    abstract val onFocusChange: (state: Int) -> Unit
     abstract val onGranted: () -> Unit
     abstract val onLoss: (isTransient: Boolean) -> Unit
     abstract var context: AudioContextAndroid
@@ -15,13 +16,14 @@ abstract class FocusManager {
     companion object {
         fun create(
             player: WrappedPlayer,
+            onFocusChange: (state: Int) -> Unit,
             onGranted: () -> Unit,
             onLoss: (isTransient: Boolean) -> Unit,
         ): FocusManager {
             return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                ModernFocusManager(player, onGranted, onLoss)
+                ModernFocusManager(player,onFocusChange, onGranted, onLoss)
             } else {
-                LegacyFocusManager(player, onGranted, onLoss)
+                LegacyFocusManager(player,onFocusChange,  onGranted, onLoss)
             }
         }
     }
@@ -51,6 +53,7 @@ abstract class FocusManager {
     abstract fun handleStop()
 
     protected fun handleFocusResult(result: Int) {
+        onFocusChange(result)
         when (result) {
             AudioManager.AUDIOFOCUS_REQUEST_GRANTED -> {
                 onGranted()
@@ -70,6 +73,7 @@ abstract class FocusManager {
 
 private class LegacyFocusManager(
     override val player: WrappedPlayer,
+    override val onFocusChange: (state: Int) -> Unit,
     override val onGranted: () -> Unit,
     override val onLoss: (isTransient: Boolean) -> Unit,
 ) : FocusManager() {
@@ -116,6 +120,7 @@ private class LegacyFocusManager(
 @RequiresApi(Build.VERSION_CODES.O)
 private class ModernFocusManager(
     override val player: WrappedPlayer,
+    override val onFocusChange: (state: Int) -> Unit,
     override val onGranted: () -> Unit,
     override val onLoss: (isTransient: Boolean) -> Unit,
 ) : FocusManager() {
