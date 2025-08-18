@@ -40,7 +40,7 @@ mixin MethodChannelAudioplayersPlatform
 
   @override
   void setOnAudioFocusChanged(void Function(int state) onFocusChanged) {
-    gOnFocusChanged = onFocusChanged;
+     gOnFocusChanged = onFocusChanged;
   }
 
   @override

@@ -1,9 +1,9 @@
 name: audioplayers_android
 resolution: workspace
 description: Android implementation of audioplayers, a Flutter plugin to play multiple audio files simultaneously
-version: 5.2.1
-homepage: https://github.com/bluefireteam/audioplayers
-repository: https://github.com/bluefireteam/audioplayers/tree/master/packages/audioplayers_android
+version: 5.2.2
+homepage: https://github.com/pozhupt/audioplayers
+repository: https://github.com/pozhupt/audioplayers/tree/master/packages/audioplayers_android
 
 flutter:
   plugin:

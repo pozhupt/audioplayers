@@ -2,8 +2,8 @@ name: audioplayers
 resolution: workspace
 description: A Flutter plugin to play multiple audio files simultaneously
 version: 6.5.0
-homepage: https://github.com/bluefireteam/audioplayers
-repository: https://github.com/bluefireteam/audioplayers/tree/master/packages/audioplayers
+homepage: https://github.com/pozhupt/audioplayers
+repository: https://github.com/pozhupt/audioplayers/tree/master/packages/audioplayers
 
 flutter:
   plugin:
@@ -22,14 +22,10 @@ flutter:
         default_package: audioplayers_windows
 
 dependencies:
-#  audioplayers_android: ^5.2.1
-  audioplayers_android:
-    path: ../audioplayers_android
+  audioplayers_android: ^5.2.2
   audioplayers_darwin: ^6.3.0
   audioplayers_linux: ^4.2.1
-#  audioplayers_platform_interface: ^7.1.1
-  audioplayers_platform_interface:
-    path: ../audioplayers_platform_interface
+  audioplayers_platform_interface: ^7.1.2
   audioplayers_web: ^5.1.1
   audioplayers_windows: ^4.2.1
   file: '>=6.1.0 <8.0.0'
